@@ -21,7 +21,7 @@ You will also see any lint errors in the console.
  - `@mui/icons-material` - library with pictures
  - `react-helmet-async` - library that provides an API and Components for managing SEO and Meta Data
  - `react-router-dom` - navigation library
- - `eslint` - is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
- - `prettier` - is a code formatter.
-
+ - `eslint` - is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code
+ - `prettier` - is a code formatter
+ - `yup` - library for form validation
 

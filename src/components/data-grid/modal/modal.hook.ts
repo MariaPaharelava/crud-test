@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { setUser } from 'src/api/users'
+import { userSchema } from 'src/types/entities'
 
 interface ModalHookProps {
   handleClose: () => void
@@ -8,38 +9,52 @@ interface ModalHookProps {
 }
 
 interface ModalHookReturns {
-  onChangeFirstName: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeLastName: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeAge: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChangeFirstName: (event: ChangeEvent<HTMLInputElement>) => void
+  onChangeLastName: (event: ChangeEvent<HTMLInputElement>) => void
+  onChangeAge: (event: ChangeEvent<HTMLInputElement>) => void
   onClickCreateButton: () => void
+  error: boolean,
 }
 
 export const useModal = ({ handleClose, handleShouldUpdate }: ModalHookProps): ModalHookReturns => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [age, setAge] = useState(0)
+  const [firstName, setFirstName] = useState<string>('')
+  const [lastName, setLastName] = useState<string>('')
+  const [age, setAge] = useState<number>(-1)
 
-  const onChangeFirstName = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const [error, setError] = useState(false)
+
+  const onChangeFirstName = (event: ChangeEvent<HTMLInputElement>): void => {
     setFirstName(event.target.value)
   }
 
-  const onChangeLastName = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const onChangeLastName = (event: ChangeEvent<HTMLInputElement>): void => {
     setLastName(event.target.value)
   }
 
-  const onChangeAge = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const onChangeAge = (event: ChangeEvent<HTMLInputElement>): void => {
     setAge(Number.parseInt(event.target.value))
   }
 
   const onClickCreateButton = (): void => {
-    setUser({
+    const isValid = userSchema.isValidSync({
       firstName,
       lastName,
       age,
-    })
-    handleClose()
-    handleShouldUpdate()
+    });
+
+    if (isValid) {
+      setUser({
+        firstName,
+        lastName,
+        age,
+      })
+      handleClose()
+      handleShouldUpdate()
+      error && setError(false)
+    } else {
+      setError(true)
+    }
   }
 
-  return { onChangeFirstName, onChangeLastName, onChangeAge, onClickCreateButton }
+  return { onChangeFirstName, onChangeLastName, onChangeAge, onClickCreateButton, error }
 }

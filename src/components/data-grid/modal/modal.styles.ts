@@ -22,5 +22,9 @@ export const styles = {
   },
   createButton: {
     mt: 2,
+  },
+  closeIcon: {
+    display: 'flex',
+    justifyContent: 'flex-end',
   }
 }
