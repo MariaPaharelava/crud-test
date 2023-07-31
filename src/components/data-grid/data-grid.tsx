@@ -4,8 +4,9 @@ import { columns } from './data-grid.const'
 import { Modal } from './modal'
 import { Toolbar } from './toolbar'
 import { useDataGrid } from './data-grid.hook'
+import { ReactElement } from 'react'
 
-export const DataGrid = () => {
+export const DataGrid = (): ReactElement<null>  => {
   const { handleOpen, handleClose, open, users, getRowId, handleShouldUpdate } =
     useDataGrid()
 

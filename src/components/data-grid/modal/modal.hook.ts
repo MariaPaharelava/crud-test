@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { setUser } from '../../../api/users'
+import { setUser } from 'src/api/users'
 
 interface ModalHookProps {
   handleClose: () => void

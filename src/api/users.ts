@@ -1,6 +1,6 @@
 import db from '../firebase-config'
 import { DocumentData, DocumentReference, addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
-import { User } from '../types/entities'
+import { User } from 'src/types/entities'
 
 export const fetchUsers = async (): Promise<User[]> => {
   const querySnapshot = await getDocs(collection(db, 'users'))

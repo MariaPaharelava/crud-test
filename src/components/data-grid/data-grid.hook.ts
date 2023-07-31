@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { fetchUsers } from '../../api/users'
-import { User } from '../../types/entities'
+import { fetchUsers } from 'src/api/users'
+import { User } from 'src/types/entities'
 
 interface DataGridHookReturn {
   open: boolean,
